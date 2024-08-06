@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NA FMIN - Create Adoption</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold; /* Add some emphasis to labels */
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px 12px; /* Increase padding for better spacing */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    height: 100px;
+}
+
+button[type="submit"] {
+    background-color: #333; /* Replace with your accent color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Create Adoption page specific styling */
+.create-adoption {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd;
+    width: 600px;
+    max-height: 750px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin-left: 30%;
+    margin-top: 50px;
+    background-image: linear-gradient(to bottom, #f8f8f8 0%, #ebebeb 100%);
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.create-adoption::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 12px; /* Increased padding for better spacing */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Add styling for image preview (optional) */
+.image-preview {
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    background-size: cover;
+    background-position: center;
+}
+.navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #444;
+            padding: 10px;
+        }
+
+        .navbar .title {
+            color: white;
+            font-size: 20px;
+            margin-left: 20px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            margin-right: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+
+</style>
+<body>
+    <div class="navbar">
+        <div class="title">Pet Adoption</div>
+        <ul>
+            <li><a href="/admin_dashboard">Home</a></li>
+            <li><a href="/view_pets">Browse</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+<div class="create-adoption">
+    <h1>Create Adoption</h1>
+
+    <form action="/add_pet" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="pet_name">Pet Name:</label>
+            <input type="text" name="pet_name" id="pet_name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="breed">Breed:</label>
+            <input type="text" name="breed" id="breed">
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <select name="type" id="type">
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+                <option value="Bird">Bird</option>
+                <option value="Rabbit">Rabbit</option>
+                <option value="Hamster">Hamster</option>
+                <option value="Fish">Fish</option>
+                <option value="Turtle">Turtle</option>
+                <option value="Snake">Snake</option>
+                <option value="Horse">Horse</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" name="age" id="age">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" name="cover_image" id="image" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+            <label for="shelter">Shelter:</label>
+            <select name="shelter" id="shelter" required>
+                {% for shelter in shelters %}
+                    <option value="{{ shelter.name }}">{{ shelter.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit">Create Adoption</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('https://images.contentstack.io/v3/assets/blt6f84e20c72a89efa/blt1473f8fa02cf305c/6261d1c93348304067e0dc0e/img-requirements-to-adopt-a-pet.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    color: #333;
+  }
+  
+  body::after {
+    content: '';
+    background: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .card {
+    background: rgba(255, 255, 255, 0.9); /* White background with 90% opacity */
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+  }
+  
+  h2 {
+    margin-bottom: 1rem;
+    color: #4CAF50; /* Green color */
+  }
+  .form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: bold;
+  }
+  
+  /* New rule for radio group */
+  .radio-group {
+    display: flex; /* Make the radio group a flex container */
+    justify-content: space-around; /* Distribute radio buttons evenly */
+    margin-top: 1rem;
+  }
+  
+  .radio-group label {
+    font-weight: normal;
+    color: #555;
+}
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 0.5rem;
+    margin: 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="password"]:focus {
+    border-color: #4CAF50; /* Green color on focus */
+    outline: none;
+  }
+  
+  .radio-group {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+  }
+  
+  .radio-group label {
+    font-weight: normal;
+    color: #555;
+  }
+  
+  button {
+    background: #4CAF50; /* Green color */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: background 0.3s ease;
+  }
+  
+  button:hover {
+    background: #45a049; /* Darker green on hover */
+  }
+  
+  button:active {
+    background: #3e8e41; /* Even darker green on press */
+  }
+  
+  .toggle-link {
+    margin-top: 20px;
+  }
+  
+  /* Navigation Links (Optional) */
+  .navigation {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+@media (max-width: 768px) {
+    .card {
+        padding: 1rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"] {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+}

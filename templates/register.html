@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Adoption Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+</head>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="alert-container">
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+            <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <div class="container">
+        <div class="card" id="register-card">
+            <h2>Register</h2>
+            <form action="/register" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile</label>
+                    <input type="tel" id="mobile" name="mobile" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="password"> Confirm Password</label>
+                    <input type="password" id="password" name="confirm_password" required>
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="role" value="shelter" onclick="toggleAdditionalFields()">
+                            Shelter</label>
+                        <label><input type="radio" name="role" value="member" onclick="toggleAdditionalFields()">
+                            Member</label>
+                    </div>
+                </div>
+                <div id="shelter-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state">
+                    </div>
+                    <div class="form-group">
+                        <label for="zipcode">Zip Code</label>
+                        <input type="text" id="zipcode" name="zipcode">
+                    </div>
+                </div>
+                <div id="member-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="city-member">City</label>
+                        <input type="text" id="city-member" name="city-member">
+                    </div>
+                    <div class="form-group">
+                        <label for="state-member">State</label>
+                        <input type="text" id="state-member" name="state-member">
+                    </div>
+                    <div class="form-group">
+                        <label for="zipcode-member">Zip Code</label>
+                        <input type="text" id="zipcode-member" name="zipcode-member">
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input type="date" id="dob" name="dob">
+                    </div>
+                    <div class="form-group">
+                        <label for="ssn">Social Security Number</label>
+                        <input type="text" id="ssn" name="ssn">
+                    </div>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+            <span class="toggle-link" onclick="toggleForms()">Already have an account? Login</span>
+        </div>
+
+        <div class="card" id="login-card" style="display: none;">
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="role" value="shelter"> Shelter</label>
+                        <label><input type="radio" name="role" value="member"> Member</label>
+                        <label><input type="radio" name="role" value="admin"> Admin</label>
+                    </div>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <span class="toggle-link" onclick="toggleForms()">Don't have an account? Register</span>
+        </div>
+    </div>
+
+    <script>
+        function toggleForms() {
+            var registerCard = document.getElementById('register-card');
+            var loginCard = document.getElementById('login-card');
+
+            if (registerCard.style.display === 'none') {
+                registerCard.style.display = 'block';
+                loginCard.style.display = 'none';
+            } else {
+                registerCard.style.display = 'none';
+                loginCard.style.display = 'block';
+            }
+        }
+
+        function toggleAdditionalFields() {
+            var shelterFields = document.getElementById('shelter-fields');
+            var memberFields = document.getElementById('member-fields');
+            var role = document.querySelector('input[name="role"]:checked').value;
+
+            if (role === 'shelter') {
+                shelterFields.style.display = 'block';
+                memberFields.style.display = 'none';
+            } else if (role === 'member') {
+                memberFields.style.display = 'block';
+                shelterFields.style.display = 'none';
+            } else {
+                shelterFields.style.display = 'none';
+                memberFields.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

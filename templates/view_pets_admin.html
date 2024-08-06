@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Pets for Adoption</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<style>
+    /* Style the body and heading */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Style the pet grid container */
+    .pet-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        /* Responsive grid layout */
+        grid-gap: 2px;
+        justify-items: center;
+    }
+
+    .pet-card {
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        padding: 20px;
+        width: 200px;
+        height: 480px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .pet-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .pet-card h2 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .pet-card p {
+        margin-bottom: 5px;
+    }
+
+    .pet-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        /* Resize image to fit card dimensions */
+        margin-bottom: 10px;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #444;
+        padding: 10px;
+    }
+
+    .navbar .title {
+        color: white;
+        font-size: 20px;
+        margin-left: 20px;
+    }
+
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 15px;
+        margin-right: 20px;
+    }
+
+    .navbar ul li {
+        display: inline;
+    }
+
+    .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        transition: background-color 0.3s;
+    }
+
+    .navbar ul li a:hover {
+        background-color: #555;
+        border-radius: 5px;
+    }
+</style>
+
+<body>
+
+
+    <div class="navbar">
+        <div class="title">Pet Adoption</div>
+        <ul>
+            {% if role == 'admin' %}
+            <li><a href="/admin_dashboard">Home</a></li>
+            {% elif role == 'foster' %}
+            <li><a href="/shelter_dashboard">Shelter Dashboard</a></li>
+            {% endif %}
+            <li><a href="/view_pets">Browse</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <h1>Available Pets for Adoption</h1>
+
+    <div class="pet-grid">
+        {% for pet in pets %}
+        <div class="pet-card">
+            <h2>{{ pet.pet_name }}</h2>
+            <img src="{{ pet.cover_image }}" alt="Pet Image">
+            <p>Breed: {{ pet.breed }}</p>
+            <p>Type: {{ pet.type }}</p>
+            <p>Age: {{ pet.age.years }} years, {{ pet.age.months }} months, {{ pet.age.weeks }} weeks</p>
+            <p>Description: {{ pet.description }}</p>
+            <p>Shelter: {{ pet.shelter_id }}</p>
+            <p>Status: {{ pet.status }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

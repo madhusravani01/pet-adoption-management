@@ -1,0 +1,133 @@
+<!-- templates/pet_table.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Details</title>
+    <!-- Include Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+            body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+            .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #444;
+            padding: 10px;
+        }
+
+        .navbar .title {
+            color: white;
+            font-size: 20px;
+            margin-left: 20px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            margin-right: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+
+</style>
+<body>
+    
+    <div class="navbar">
+        <div class="title">Pet Adoption</div>
+        <ul>
+            {% if role == 'admin' %}
+            <li><a href="/admin_dashboard">Home</a></li>
+            {% elif role == 'shelter' %}
+            <li><a href="/shelter_dashboard">Shelter Dashboard</a></li>
+        {% endif %}
+        <li><a href="/view_pets">Browse</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+    
+    <div class="container mt-5">
+        <h2>Pet Details</h2>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Pet Name</th>
+                    <th>Breed</th>
+                    <th>Type</th>
+                    <th>Age</th>
+                    <th>Description</th>
+                    <th>Shelter ID</th>
+                    <th>Adopter Name</th>
+                    <th>Contact Number</th>
+                    <th>Reason</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Update Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pet_detail in pet_details %}
+                <tr>
+                    <td>{{ pet_detail.pet_name }}</td>
+                    <td>{{ pet_detail.breed }}</td>
+                    <td>{{ pet_detail.type }}</td>
+                    <td>{{ pet_detail.age }}</td>
+                    <td>{{ pet_detail.description }}</td>
+                    <td>{{ pet_detail.shelter_id }}</td>
+                    <td>{{ pet_detail.adopter_name }}</td>
+                    <td>{{ pet_detail.contact_number }}</td>
+                    <td>{{ pet_detail.reason }}</td>
+                    <td>{{ pet_detail.email }}</td>
+                    <td>{{ pet_detail.adoption_status }}</td>
+                    <td>
+                        <form action="{{ url_for('update_status', adoption_id=pet_detail.adoption_id) }}" method="POST">
+                            <select name="status" class="form-control" onchange="this.form.submit()">
+\                                <option value="Adopted" {% if pet_detail.adoption_status == 'Adopted' %} selected {% endif %}>Adopted</option>
+                                <option value="Reject" {% if pet_detail.adoption_status == 'Reject' %} selected {% endif %}>Reject</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        
+                    </td>
+                    <td>
+                
+                        </form>
+                        <form action="{{ url_for('delete_adoption', adoption_id=pet_detail.adoption_id) }}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete Adoption</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include Bootstrap JS for button styles -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

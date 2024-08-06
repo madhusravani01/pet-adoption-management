@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Shelters</title>
+    <!-- Assuming you have included necessary CSS and Font Awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #444;
+            padding: 10px;
+        }
+
+        .navbar .title {
+            color: white;
+            font-size: 20px;
+            margin-left: 20px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+            margin-right: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #555;
+            border-radius: 5px;
+        }
+    </style>
+
+<body>
+
+    <div class="navbar">
+        <div class="title">Pet Adoption</div>
+        <ul>
+            {% if role == 'admin' %}
+            <li><a href="/admin_dashboard">Home</a></li>
+            {% elif role == 'shelter' %}
+            <li><a href="/shelter_dashboard">Shelter Dashboard</a></li>
+            {% endif %}
+            <li><a href="/view_pets">Browse</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="container mt-5">
+        <h2>Shelter Details</h2>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for shelter in shelters %}
+                <tr>
+                    <td>{{ shelter.name }}</td>
+                    <td>{{ shelter.email }}</td>
+                    <td>{{ shelter.mobile }}</td>
+                    <td>{{ shelter.address }}</td>
+                    <td>{{ shelter.city }}</td>
+                    <td>{{ shelter.state }}</td>
+                    <td>{{ shelter.status }}</td>
+                    <td>
+                        {% if shelter.status == 'disapproved' %}
+                        <a href="{{ url_for('approve_shelter', shelter_id=shelter._id) }}"
+                            class="btn-approve">Approve</a>
+                        {% elif shelter.status == 'approved' %}
+                        <a href="{{ url_for('disapprove_shelter', shelter_id=shelter._id) }}"
+                            class="btn-disapprove">Disapprove</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- Include Bootstrap JS for button styles -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

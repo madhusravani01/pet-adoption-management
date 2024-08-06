@@ -1,0 +1,104 @@
+<!-- templates/pet_table.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Details</title>
+    <!-- Include Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #444;
+        padding: 10px;
+    }
+
+    .navbar .title {
+        color: white;
+        font-size: 20px;
+        margin-left: 20px;
+    }
+
+    .navbar ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 15px;
+        margin-right: 20px;
+    }
+
+    .navbar ul li {
+        display: inline;
+    }
+
+    .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        transition: background-color 0.3s;
+    }
+
+    .navbar ul li a:hover {
+        background-color: #555;
+        border-radius: 5px;
+    }
+</style>
+
+<body>
+    <div class="navbar">
+        <div class="title">Pet Adoption</div>
+        <ul>
+            <li><a href="/member_dashbaord">Home</a></li>
+            <li><a href="/user_view_adoptions">History</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </div>
+    <div class="container mt-5">
+        <h2>Pet Details</h2>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Pet Name</th>
+                    <th>Breed</th>
+                    <th>Type</th>
+                    <th>Age</th>
+                    <th>Description</th>
+                    <th>Shelter ID</th>
+                    <th>Adopter Name</th>
+                    <th>Contact Number</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pet_detail in pet_details %}
+                <tr>
+                    <td>{{ pet_detail.pet_name }}</td>
+                    <td>{{ pet_detail.breed }}</td>
+                    <td>{{ pet_detail.type }}</td>
+                    <td>Age: {{ pet_detail.age.years }} years, {{ pet_detail.age.months }} months, {{
+                        pet_detail.age.weeks }} weeks</td>
+                    <td>{{ pet_detail.description }}</td>
+                    <td>{{ pet_detail.shelter_id }}</td>
+                    <td>{{ pet_detail.adopter_name }}</td>
+                    <td>{{ pet_detail.contact_number }}</td>
+                    <td>{{ pet_detail.email }}</td>
+                    <td>{{ pet_detail.adoption_status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Include Bootstrap JS for button styles -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

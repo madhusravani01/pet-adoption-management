@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shelter Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+
+  .card-container {
+    display: grid;
+    /* Use grid layout for better organization */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* Responsive columns */
+    gap: 20px;
+    /* Spacing between cards */
+    justify-content: center;
+    /* Center cards horizontally */
+    margin: 20px auto;
+    width: 80%;
+  }
+
+  .card {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: 0.2s ease-in-out;
+  }
+
+  .card a {
+    text-decoration: none;
+    color: #555;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .card h2 {
+    margin-bottom: 10px;
+  }
+
+  .card i {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    /* Inherit text color */
+    font-style: normal;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #444;
+    padding: 10px;
+  }
+
+  .navbar .title {
+    color: white;
+    font-size: 20px;
+    margin-left: 20px;
+  }
+
+  .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    margin-right: 20px;
+  }
+
+  .navbar ul li {
+    display: inline;
+  }
+
+  .navbar ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+  }
+
+  .navbar ul li a:hover {
+    background-color: #555;
+    border-radius: 5px;
+  }
+</style>
+
+<body>
+
+  <div class="navbar">
+    <div class="title">Pet Adoption</div>
+    <ul>
+      <li><a href="/shelter_dashboard">Home</a></li>
+      <li><a href="/view_pets">Browse</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+
+
+
+  <h1>Shelter Dashboard</h1>
+
+  <div class="card-container">
+    <a href="{{ url_for('foster_add_pet') }}">
+      <div class="card">
+        <i class="fas fa-handshake"></i>
+        <h2>Add Adoption</h2>
+        <p>Manage adoption requests and foster applications.</p>
+      </div>
+    </a>
+    <a href="/view_adoptions">
+      <div class="card">
+        <i class="fas fa-folder-open"></i>
+        <h2>View Applications</h2>
+        <p>Review adoption applications submitted by potential adopters.</p>
+      </div>
+    </a>
+    <a href="/view_pets">
+      <div class="card">
+        <i class="fas fa-paw"></i>
+        <h2>View Available Pets</h2>
+        <p>View a list of pets currently available for adoption.</p>
+      </div>
+    </a>
+    <a href="/shelter_view_pets">
+      <div class="card">
+        <i class="fas fa-edit"></i>
+        <h2>Edit Adoption Posts</h2>
+        <p>Edit or update existing adoption posts for pets.</p>
+      </div>
+    </a>
+  </div>
+
+</body>
+
+</html>
